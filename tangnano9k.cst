@@ -1,0 +1,4 @@
+IO_LOC "clk" 52;
+IO_LOC "txData" 57;
+IO_LOC "rst" 4;
+IO_PORT "txData" PULL_MODE=UP;
