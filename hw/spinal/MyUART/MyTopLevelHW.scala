@@ -6,14 +6,14 @@ import spinal.lib._
 // Hardware definition
 case class MyTopLevelHW() extends Component {
   val io = new Bundle {
-    val txData = out Bool() 
+    val txData = out Bool ()
   }
 
-    io.txData.setName("txData")
+  io.txData.setName("txData")
 
-    val toplevel = new MyTopLevel()
+  val toplevel = new MyTopLevel()
 
-    io <> toplevel.io
+  io <> toplevel.io
 
 }
 

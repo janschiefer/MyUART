@@ -25,6 +25,6 @@ object MyTopLevelFormal extends App {
       assert(dut.io.state === past(dut.io.state + U(dut.io.cond0)).init(0))
     })
 
-    */
-    
+   */
+
 }
