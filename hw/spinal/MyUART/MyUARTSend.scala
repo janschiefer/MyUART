@@ -17,6 +17,8 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
 
   }
 
+    val popStream = Stream(Bits(8 bits))
+
   val slowUARTClock = new SlowArea(bitrateClockDivider) {
 
     val parityReg = Reg(Bool())
@@ -26,8 +28,6 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
 
     val bitCounter = RegInit(U(0, log2Up(bitsPerTransfer) bit))
 
-    io.sendDataStream.ready := !busyBit
-
     val fsm = new StateMachine {
 
       val UART_IDLE: State = new State with EntryPoint {
@@ -35,7 +35,7 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
           busyBit := False
         }
         whenIsActive {
-          when(io.sendDataStream.valid) {
+          when(popStream.valid) {
             goto(UART_SEND_START_BIT)
           }
         }
@@ -59,7 +59,7 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
         }
 
         whenIsActive {
-          io.txData := io.sendDataStream.payload(bitCounter)
+          io.txData := popStream.payload(bitCounter)
           parityReg := parityReg ^ io.txData
 
           when(bitCounter < U(bitsPerTransfer - 1).resized) {
@@ -98,5 +98,16 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
       }
     }
   }
+
+popStream.ready := slowUARTClock.busyBit.fall()
+
+
+val input_fifo = StreamFifo(
+  dataType  = Bits(8 bits),
+  depth     = 32,
+)
+
+input_fifo.io.push << io.sendDataStream
+input_fifo.io.pop  >> popStream
 
 }
