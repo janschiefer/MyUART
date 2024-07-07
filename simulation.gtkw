@@ -1,12 +1,12 @@
 [*]
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
-[*] Sat Jul  6 21:46:51 2024
+[*] Sat Jul  6 23:13:47 2024
 [*]
 [dumpfile] "/home/jschiefer/Code/MyUART/simWorkspace/MyTopLevel/test/wave.fst"
-[dumpfile_mtime] "Sat Jul  6 21:46:23 2024"
-[dumpfile_size] 2197
+[dumpfile_mtime] "Sat Jul  6 23:13:24 2024"
+[dumpfile_size] 4346
 [savefile] "/home/jschiefer/Code/MyUART/simulation.gtkw"
-[timestart] 48800
+[timestart] 0
 [size] 1920 1001
 [pos] 25 22
 *-11.292767 18580 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
@@ -15,11 +15,13 @@
 [sst_width] 594
 [signals_width] 350
 [sst_expanded] 1
-[sst_vpaned_height] 222
+[sst_vpaned_height] 209
 @28
 TOP.clk
-@820
-TOP.MyTopLevel.fsm_stateReg_string[127:0]
+@25
+TOP.MyTopLevel.push_counter[7:0]
+@22
+TOP.MyTopLevel.pushStream_payload[7:0]
 @28
 TOP.MyTopLevel.send.io_sendDataStream_valid
 TOP.MyTopLevel.send.io_sendDataStream_ready
@@ -27,22 +29,8 @@ TOP.MyTopLevel.send.io_sendDataStream_ready
 TOP.MyTopLevel.send.slowUARTClock_fsm_stateReg_string[159:0]
 @24
 TOP.MyTopLevel.send.slowUARTClock_bitCounter[2:0]
-@29
+@28
 TOP.MyTopLevel.io_txData
-@28
 TOP.MyTopLevel.send.slowUARTClock_parityReg
-@800022
-TOP.MyTopLevel.writeStream_payload[7:0]
-@28
-(0)TOP.MyTopLevel.writeStream_payload[7:0]
-(1)TOP.MyTopLevel.writeStream_payload[7:0]
-(2)TOP.MyTopLevel.writeStream_payload[7:0]
-(3)TOP.MyTopLevel.writeStream_payload[7:0]
-(4)TOP.MyTopLevel.writeStream_payload[7:0]
-(5)TOP.MyTopLevel.writeStream_payload[7:0]
-(6)TOP.MyTopLevel.writeStream_payload[7:0]
-(7)TOP.MyTopLevel.writeStream_payload[7:0]
-@1001200
--group_end
 [pattern_trace] 1
 [pattern_trace] 0
