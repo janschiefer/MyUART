@@ -17,7 +17,7 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
 
   }
 
-    val popStream = Stream(Bits(8 bits))
+  val popStream = Stream(Bits(8 bits))
 
   val slowUARTClock = new SlowArea(bitrateClockDivider) {
 
@@ -99,15 +99,14 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
     }
   }
 
-popStream.ready := slowUARTClock.busyBit.fall()
+  popStream.ready := slowUARTClock.busyBit.fall()
 
+  val input_fifo = StreamFifo(
+    dataType = Bits(8 bits),
+    depth = 32
+  )
 
-val input_fifo = StreamFifo(
-  dataType  = Bits(8 bits),
-  depth     = 32,
-)
-
-input_fifo.io.push << io.sendDataStream
-input_fifo.io.pop  >> popStream
+  input_fifo.io.push << io.sendDataStream
+  input_fifo.io.pop >> popStream
 
 }
