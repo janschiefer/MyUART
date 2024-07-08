@@ -7,6 +7,22 @@ import spinal.core.formal._
 // See https://spinalhdl.github.io/SpinalDoc-RTD/master/SpinalHDL/Formal%20verification/index.html#installing-requirements
 object MyTopLevelFormal extends App {
 
+  // CHECK 1: Line should be always high when NOT busy aka idle
+  FormalConfig
+    .withProve(50)
+    .doVerify(new Component {
+      val dut = FormalDut(MyUARTSend(2, 8, 2, UartParity.ODD))
+
+      assumeInitial(clockDomain.isResetActive)
+
+      anyseq(dut.io.sendDataStream.payload)
+
+      dut.io.sendDataStream.valid := False
+
+      assert(dut.io.txData)
+
+    })
+
   /*
 
   FormalConfig

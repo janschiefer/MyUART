@@ -47,7 +47,7 @@ case class MyTopLevel() extends Component {
 
   }
 
-  val send = MyUARTSend(234, 8, 2, UartParity.ODD) // 234 for 115200 bps
+  val send = MyUARTSend(234, 8, 2, UartParity.ODD) // 234 for 115200 bps @ 27 MHz
 
   io.txData <> send.io.txData
   pushStream >> send.io.sendDataStream

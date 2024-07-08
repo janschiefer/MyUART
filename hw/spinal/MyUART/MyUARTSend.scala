@@ -35,6 +35,7 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
           busyBit := False
         }
         whenIsActive {
+
           when(popStream.valid) {
             goto(UART_SEND_START_BIT)
           }
@@ -97,6 +98,7 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
         }
       }
     }
+
   }
 
   popStream.ready := slowUARTClock.busyBit.fall()
