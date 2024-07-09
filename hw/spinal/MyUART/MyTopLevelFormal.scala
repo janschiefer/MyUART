@@ -15,9 +15,9 @@ object MyTopLevelFormal extends App {
 
       assumeInitial(clockDomain.isResetActive)
 
-      anyseq(dut.io.sendDataStream.payload)
+      anyseq(dut.io.uartDataStream.payload)
 
-      dut.io.sendDataStream.valid := False
+      dut.io.uartDataStream.valid := False
 
       assert(dut.io.txData)
 

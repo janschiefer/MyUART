@@ -4,20 +4,13 @@ import spinal.core._
 import spinal.lib._
 import spinal.lib.fsm._
 
-object UartParity extends SpinalEnum(binarySequential) {
-  val NONE, EVEN, ODD = newElement()
-}
-
 // Hardware definition
 case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: Int, parity: UartParity.E)
     extends Component {
   val io = new Bundle {
     val txData = out Bool ()
-    val sendDataStream = slave Stream (Bits(bitsPerTransfer bits))
-
+    val uartDataStream = slave Stream (Bits(bitsPerTransfer bits))
   }
-
-  val popStream = Stream(Bits(8 bits))
 
   val slowUARTClock = new SlowArea(bitrateClockDivider) {
 
@@ -36,7 +29,7 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
         }
         whenIsActive {
 
-          when(popStream.valid) {
+          when(io.uartDataStream.valid) {
             goto(UART_SEND_START_BIT)
           }
         }
@@ -60,7 +53,7 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
         }
 
         whenIsActive {
-          io.txData := popStream.payload(bitCounter)
+          io.txData := io.uartDataStream.payload(bitCounter)
           parityReg := parityReg ^ io.txData
 
           when(bitCounter < U(bitsPerTransfer - 1).resized) {
@@ -101,14 +94,6 @@ case class MyUARTSend(bitrateClockDivider: Int, bitsPerTransfer: Int, stopBits: 
 
   }
 
-  popStream.ready := slowUARTClock.busyBit.fall()
-
-  val input_fifo = StreamFifo(
-    dataType = Bits(8 bits),
-    depth = 32
-  )
-
-  input_fifo.io.push << io.sendDataStream
-  input_fifo.io.pop >> popStream
+  io.uartDataStream.ready := slowUARTClock.busyBit.fall()
 
 }
