@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 source ~/.sdkman/bin/sdkman-init.sh
-sdk use java 17.0.11-tem
+sdk use java 17.0.12-tem
 source ~/oss-cad-suite/environment
 rm -f *.json *.fs *.log hw/gen/*.v hw/gen/*.vhd
 sbt "runMain MyUART.MyTopLevelHWVerilog"

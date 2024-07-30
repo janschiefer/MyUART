@@ -1,0 +1,29 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Tue Jul 30 02:30:00 2024
+[*]
+[dumpfile] "/home/jschiefer/MyUART/simWorkspace/unamed/unamed_prove/engine_0/trace_induct.vcd"
+[dumpfile_mtime] "Tue Jul 30 02:26:57 2024"
+[dumpfile_size] 29519
+[savefile] "/home/jschiefer/MyUART/formal.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-7.933677 500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] unamed.
+[sst_width] 276
+[signals_width] 278
+[sst_expanded] 1
+[sst_vpaned_height] 158
+@29
+unamed.dut.clk
+@28
+unamed.dut.io_txData
+@22
+unamed.dut.io_uartDataStream_payload[7:0]
+@28
+unamed.dut.io_uartDataStream_ready
+unamed.dut.io_uartDataStream_valid
+unamed.dut.slowUARTClock_formal_test_bytes
+[pattern_trace] 1
+[pattern_trace] 0
